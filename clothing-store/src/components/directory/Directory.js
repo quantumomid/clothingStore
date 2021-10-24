@@ -13,9 +13,9 @@ export default class Directory extends React.Component{
 
     render(){
 
-        const menuItems = this.state.sections.map((section) => {
+        const menuItems = this.state.sections.map(({title}) => {
             return (
-                <MenuItem title={section.title}/>
+                <MenuItem title={title}/>
             )
         })
 
