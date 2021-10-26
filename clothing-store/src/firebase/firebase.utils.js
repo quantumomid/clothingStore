@@ -12,6 +12,38 @@ const config = {
     measurementId: "G-SMS9JQ5VPV"
   };
 
+  // async function because making requests to database
+  export const createUserProfileDocument = async(userAuth, additionalData) => {
+    
+    if(!userAuth) return;
+    //firestore returns either of two objects: REFERENCES or SNAPSHOTS - these objects can be of DOCUMENT or COLLECTION version.
+    const userRef = firestore.doc(`users/${userAuth.uid}`)
+
+    const snapShot = await userRef.get()
+
+    // console.log(snapShot)
+
+    if(!snapShot.exists){
+      const { displayName, email } = userAuth
+
+      const createdAt = new Date()
+
+      //Therefore if the snapshot doesnt exist then we will create a new user 
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          ...additionalData
+        })
+
+      } catch (error) {
+        console.log('error creating user', error.message)
+      }
+    }
+    return userRef
+  }
+
   firebase.initializeApp(config)
 
   export const auth = firebase.auth()

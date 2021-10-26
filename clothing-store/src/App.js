@@ -5,7 +5,7 @@ import HomePage from './pages/homepage/HomePage'
 import Shop from './pages/shop/Shop'
 import Header from './components/header/Header';
 import SignIn from './pages/sign-in/SignIn';
-import { auth } from './firebase/firebase.utils'
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
 class App extends React.Component {
   constructor(){
@@ -22,9 +22,25 @@ class App extends React.Component {
     // the onAuthStateChanged method allows us to keep track of user changes - it is essentially a subscriber listening to 
     // the auth
     // This is an open subscription - checking for us continuously while our App is mounted on the DOM
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({currentUser: user})
-      console.log(user)
+    this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
+      // this.setState({currentUser: userAuth})
+      // console.log(userAuth)
+
+      if(userAuth){
+        const userRef = await createUserProfileDocument(userAuth)
+        userRef.onSnapshot(snapShot => {
+          // console.log(snapShot.data())
+
+          this.setState({
+            currentUser: {
+              id: snapShot.id, 
+              ...snapShot.data()
+            }
+          }, () => console.log(this.state))
+        })
+      }
+      // if no userAuth, i.e. its null, then set currentUser to null
+      this.setState({currentUser: userAuth})
     })
   }
 
