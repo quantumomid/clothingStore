@@ -34,9 +34,10 @@ export default class Login extends React.Component{
                     <FormInput name="email" type="email" value={this.state.email} required handleChange={this.handleChange} label="email"/>
                     <FormInput name="password" type="password" value={this.state.password} required handleChange={this.handleChange} label="password"/>
 
-                    <CustomButton type="submit">Log In</CustomButton>
-                    <CustomButton onClick={signInWithGoogle}>Log In with Google</CustomButton>
-
+                    <div className="button">
+                        <CustomButton type="submit">Log In</CustomButton>
+                        <CustomButton onClick={signInWithGoogle} isGoogleSignIn>Log In with Google</CustomButton>
+                    </div>
                 </form>
             </div>
         )

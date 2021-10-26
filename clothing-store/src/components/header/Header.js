@@ -1,9 +1,10 @@
 import './Header.scss'
 import { Link } from 'react-router-dom'
+import { auth } from '../../firebase/firebase.utils'
 // below is a special syntax for importing SVG in React :o
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 
-export default function Header(){
+export default function Header({ currentUser }){
 
     return(
         <div className="header">
@@ -19,9 +20,13 @@ export default function Header(){
                 <Link className="option" to='/shop'>
                     CONTACT
                 </Link>
-                <Link className="option" to='/signin'>
+                { currentUser ? (
+                    <div className="option" onClick={() => auth.signOut()}>SIGN-OUT</div>
+                ) : (
+                    <Link className="option" to='/signin'>
                     SIGN-IN
                 </Link>
+                )}
             </div>
 
         </div>
