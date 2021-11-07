@@ -43,9 +43,9 @@ function Header({ currentUser, hidden }){
     )
 }
 
-const mapStateToProps = (state) => ({
-    currentUser: selectCurrentUser(state),
-    hidden: selectCartHidden(state)
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 });
 
 export default connect(mapStateToProps)(Header);
