@@ -12,3 +12,5 @@ Run npm update first
 - Redux
 
 - Stripe API
+
+- Styled Components 
