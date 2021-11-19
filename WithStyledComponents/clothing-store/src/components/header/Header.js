@@ -1,5 +1,3 @@
-// import "./Header.scss";
-// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 // below is a special syntax for importing SVG in React :o
@@ -10,7 +8,7 @@ import { selectCartHidden } from "../../redux/cart/cartSelectors";
 import { selectCurrentUser } from "../../redux/user/userSelectors";
 import { createStructuredSelector } from "reselect";
 
-import { HeaderContainer, LogoContainer, OptionDiv, OptionLink, OptionsContainer } from "./headerStyles";
+import { HeaderContainer, LogoContainer, OptionLink, OptionsContainer } from "./headerStyles";
 
 function Header({ currentUser, hidden }){
 
@@ -29,7 +27,7 @@ function Header({ currentUser, hidden }){
                     CONTACT
                 </OptionLink>
                 { currentUser ? (
-                    <OptionDiv onClick={() => auth.signOut()}>SIGN-OUT</OptionDiv>
+                    <OptionLink as="div" onClick={() => auth.signOut()}>SIGN-OUT</OptionLink>
                 ) : (
                     <OptionLink to='/signin'>
                     SIGN-IN

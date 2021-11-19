@@ -1,12 +1,5 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-
-// the css method from styled components lets us write CSS blocks 
-// which we can reference and reuse to prevent repeating ourselves
-const optionStyles = css`
-    padding: 10px 15px;
-    cursor: pointer
-`
 
 export const HeaderContainer = styled.div`
     height: 70px;
@@ -32,9 +25,6 @@ export const OptionsContainer = styled.div`
 `
 
 export const OptionLink = styled(Link)`
-    ${optionStyles}
-`
-
-export const OptionDiv = styled.div`
-    ${optionStyles}
+    padding: 10px 15px;
+    cursor: pointer
 `
