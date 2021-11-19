@@ -1,8 +1,9 @@
 import React from 'react';
-import './Register.scss'
+// import './Register.scss'
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { RegisterContainer, RegisterTitle } from './registerStyles';
 
 export default class Register extends React.Component{
     constructor(){
@@ -44,8 +45,8 @@ export default class Register extends React.Component{
     render(){
         const {displayName, email, password, confirmPassword} = this.state
         return(
-            <div className="sign-up">
-                <h2 className="title">I do not have an account</h2>
+            <RegisterContainer>
+                <RegisterTitle>I do not have an account</RegisterTitle>
                 <span>Sign up with your email and password</span>
                 <form className="sign-up-form" onSubmit={this.handleSubmit}>
                     <FormInput  
@@ -82,7 +83,7 @@ export default class Register extends React.Component{
                     />
                     <CustomButton type="submit">SIGN-UP</CustomButton>
                 </form>
-            </div>
+            </RegisterContainer>
         )
     }
 }
