@@ -1,12 +1,13 @@
-import './SignIn.scss'
+// import './SignIn.scss'
 import Login from '../../components/login/Login'
 import Register from '../../components/register/Register'
+import { SignInAndRegisterContainer } from './signInStyles'
 
 export default function SignIn(){
     return (
-        <div className="sign-in">
+        <SignInAndRegisterContainer>
             <Login />
             <Register />
-        </div>
+        </SignInAndRegisterContainer>
     )
 }
