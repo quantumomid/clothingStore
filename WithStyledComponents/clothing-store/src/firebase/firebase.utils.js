@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
+import Collection from '../pages/collection/Collection';
 
 const config = {
   apiKey: "AIzaSyB5MO17LhbIKDdVBCHq6QIexg29bDz-szA",
@@ -63,6 +64,37 @@ const config = {
     // fire off our batch call
     // this returns a promise
     return await batch.commit();
+  };
+
+  // Gets the snapshot collection and we map it to an object
+  export const convertCollectionsSnapshotToMap = (collections) => {
+
+    // .docs will give us the query snapshot array - then we map through
+    // each of the data and destructure for the title and items
+    const transformedCollection = collections.docs.map( doc => {
+
+      const { title, items } = doc.data();
+    
+      // encodeURI is a JS method that takes a string and converts any characters
+      // that a url would not understand into ones it would be able to read
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id,
+        title,
+        items
+      };
+    });
+    // console.log(transformedCollection);
+    
+    //convert from an array into an object where the key is the title of the
+    // collection and the value the actual collection
+    return transformedCollection.reduce((accumulator, collection) => {
+      // console.log(collection);
+      accumulator[collection.title.toLowerCase()] = collection;
+      // console.log(accumulator);
+      return accumulator;
+    }, {});
+
   };
 
   firebase.initializeApp(config)

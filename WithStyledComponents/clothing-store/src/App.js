@@ -6,12 +6,11 @@ import HomePage from "./pages/homepage/HomePage";
 import Shop from "./pages/shop/Shop";
 import Header from "./components/header/Header";
 import SignIn from "./pages/sign-in/SignIn";
-import { addCollectionAndDocuments, auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/userActions";
 import { selectCurrentUser } from "./redux/user/userSelectors";
 import { createStructuredSelector } from "reselect";
 import Checkout from "./pages/checkout/Checkout";
-import { selectShopCollectionsForPreview } from "./redux/shop/shopSelector";
 
 class App extends React.Component {
 
@@ -20,7 +19,7 @@ class App extends React.Component {
 
   componentDidMount(){
     // Getting the dispatcher from redux to set current user
-    const { setCurrentUser, collectionsArray } = this.props;
+    const { setCurrentUser } = this.props;
 
     // the onAuthStateChanged method allows us to keep track of user changes - it is essentially a subscriber listening to 
     // the auth
@@ -43,7 +42,6 @@ class App extends React.Component {
       }
       // if no userAuth, i.e. its null, then set currentUser to null
       setCurrentUser(userAuth)
-      addCollectionAndDocuments("collections", collectionsArray.map(({ title, items }) => ({ title, items }) ))
     })
   }
 
@@ -69,8 +67,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser, 
-  collectionsArray: selectShopCollectionsForPreview
+  currentUser: selectCurrentUser 
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -14,3 +14,14 @@ Run npm update first
 - Stripe API
 
 - Styled Components 
+
+- Authentication
+
+
+## Deployed
+
+version 1: using static data and scss files 
+
+- version 1 with Heroku: https://clothingstore-heroku-live.herokuapp.com/ 
+
+version 2: using styled components and firestore for clothing data storage and retrieval
