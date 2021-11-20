@@ -6,11 +6,12 @@ import HomePage from "./pages/homepage/HomePage";
 import Shop from "./pages/shop/Shop";
 import Header from "./components/header/Header";
 import SignIn from "./pages/sign-in/SignIn";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { addCollectionAndDocuments, auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/userActions";
 import { selectCurrentUser } from "./redux/user/userSelectors";
 import { createStructuredSelector } from "reselect";
 import Checkout from "./pages/checkout/Checkout";
+import { selectShopCollectionsForPreview } from "./redux/shop/shopSelector";
 
 class App extends React.Component {
 
@@ -18,7 +19,9 @@ class App extends React.Component {
   unsubscribeFromAuth = null
 
   componentDidMount(){
-    const { setCurrentUser } = this.props;
+    // Getting the dispatcher from redux to set current user
+    const { setCurrentUser, collectionsArray } = this.props;
+
     // the onAuthStateChanged method allows us to keep track of user changes - it is essentially a subscriber listening to 
     // the auth
     // This is an open subscription - checking for us continuously while our App is mounted on the DOM
@@ -40,6 +43,7 @@ class App extends React.Component {
       }
       // if no userAuth, i.e. its null, then set currentUser to null
       setCurrentUser(userAuth)
+      addCollectionAndDocuments("collections", collectionsArray.map(({ title, items }) => ({ title, items }) ))
     })
   }
 
@@ -65,7 +69,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser, 
+  collectionsArray: selectShopCollectionsForPreview
 });
 
 const mapDispatchToProps = dispatch => ({

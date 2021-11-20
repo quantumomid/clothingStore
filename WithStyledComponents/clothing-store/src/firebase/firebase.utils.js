@@ -44,6 +44,27 @@ const config = {
     return userRef
   }
 
+  export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+    console.log(collectionRef);
+
+    // Allows us to batch/group all of our calls into one big request
+    // this will allow us to only add the data if all succeed but if one fails 
+    // then all fail 
+    const batch = firestore.batch();
+    objectsToAdd.forEach(obj => {
+      // Getting new document reference in this collecion and 
+      // generating new random Id v
+      const newDocRef = collectionRef.doc();
+      console.log(newDocRef);
+      batch.set(newDocRef, obj);
+    });
+
+    // fire off our batch call
+    // this returns a promise
+    return await batch.commit();
+  };
+
   firebase.initializeApp(config)
 
   export const auth = firebase.auth()
