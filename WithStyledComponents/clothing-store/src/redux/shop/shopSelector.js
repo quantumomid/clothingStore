@@ -10,12 +10,12 @@ export const selectShopCollections = createSelector(
 
 export const selectShopCollectionsForPreview = createSelector(
     [selectShopCollections],
-    collections => Object.keys(collections).map(key => collections[key])
+    collections => collections ? Object.keys(collections).map(key => collections[key]) : []
 );
 
 // Since collectionUrlParam is a dynamic  argument - to memoize selectShopCollection we will need to actually 
 // memoize the WHOLE function - we do this with the help of the memoize() function from lodash 
 export const selectShopCollection = memoize(collectionUrlParam => createSelector(
     [selectShopCollections], 
-    collections => collections[collectionUrlParam]
+    collections => collections ? collections[collectionUrlParam] : null
 )) 
