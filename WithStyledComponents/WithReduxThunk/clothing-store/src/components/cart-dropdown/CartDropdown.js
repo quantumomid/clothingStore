@@ -4,7 +4,6 @@ import { createStructuredSelector } from "reselect";
 import { selectCartItems } from "../../redux/cart/cartSelectors";
 import { withRouter } from "react-router";
 import CartItem from "../cart-item/CartItem";
-// import "./CartDropdown.scss";
 import { toggleCartHidden } from "../../redux/cart/cartActions";
 import { CartDropdownButton, CartDropdownContainer, CartItemsContainer, EmptyMessageContainer } from "./cartDropdownStyles";
 

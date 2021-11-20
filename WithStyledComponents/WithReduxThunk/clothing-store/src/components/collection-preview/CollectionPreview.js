@@ -1,4 +1,3 @@
-// import './CollectionPreview.scss'
 import { withRouter } from "react-router-dom";
 import CollectionItem from '../collection-item/CollectionItem'
 import { CollectionPreviewContainer, PreviewContainer, TitleContainer } from './collectionPreviewStyles'

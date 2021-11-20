@@ -1,6 +1,5 @@
 import { withRouter } from 'react-router-dom'
 import { BackgroundImage, ContentContainer, ContentSubtitle, ContentTitle, MenuItemContainer } from './menuItemStyles'
-// import './MenuItem.scss'
 
 function MenuItem({ title, imageUrl, size, history, linkUrl, match }){
     return(

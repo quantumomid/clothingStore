@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { addItem } from "../../redux/cart/cartActions";
-// import "./CollectionItem.scss";
 import { AddCartButton, BackgroundImage, CollectionFooterContainer, CollectionItemContainer, NameContainer, PriceContainer } from "./collectionItemStyles";
 
 

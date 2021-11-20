@@ -1,5 +1,3 @@
-// import "./Collection.scss";
-
 import CollectionItem from "../../components/collection-item/CollectionItem";
 import { connect } from "react-redux";
 import { selectShopCollection } from "../../redux/shop/shopSelector";

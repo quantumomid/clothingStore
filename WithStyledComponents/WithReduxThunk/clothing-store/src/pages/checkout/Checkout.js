@@ -4,7 +4,6 @@ import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 import StripeButton from "../../components/stripe-button/StripeButton";
 import { selectCartItems, selectCartTotal } from "../../redux/cart/cartSelectors";
 import { CheckoutHeaderContainer, CheckoutPageContainer, HeaderBlockContainer, TotalContainer, WarningContainer } from "./checkoutStyles";
-// import "./Checkout.scss";
 
 const Checkout = ({ cartItems, total }) => {
     return (

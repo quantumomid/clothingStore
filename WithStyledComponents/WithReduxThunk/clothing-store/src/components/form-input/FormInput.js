@@ -1,5 +1,3 @@
-// import './FormInput.scss'
-
 import { FormInputContainer, FormInputLabel, GroupContainer } from "./formInputStyles";
 
 const FormInput =  ({ handleChange, label, ...otherInputProps }) => (
