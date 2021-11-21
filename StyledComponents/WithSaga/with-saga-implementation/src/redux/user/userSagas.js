@@ -1,7 +1,8 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
-import { auth, createUserProfileDocument, googleProvider } from "../../firebase/firebase.utils";
+import { auth, createUserProfileDocument, getCurrentUser, googleProvider } from "../../firebase/firebase.utils";
 import { signInFailure, signInSuccess } from "./userActions";
-import { EMAIL_SIGN_IN_START, GOOGLE_SIGN_IN_START } from "./userActionTypes";
+import { CHECK_USER_SESSION, EMAIL_SIGN_IN_START, GOOGLE_SIGN_IN_START } from "./userActionTypes";
+
 
 // resusable generator helper function to use in google and emailandpassword 
 // sign ins!
@@ -45,8 +46,21 @@ export function* onEmailSignInStart(){
     yield takeLatest(EMAIL_SIGN_IN_START, signInWithEmail)
 }
 
+export function* isUserAuthenticated(){
+    try {
+        const userAuth = yield getCurrentUser();
+        if (!userAuth) return;
+        yield getSnapshotFromUserAuth(userAuth);
+    } catch (error) {
+        yield put(signInFailure(error))
+    }
+}
+
+export function* onCheckUserSession(){
+    yield takeLatest(CHECK_USER_SESSION, isUserAuthenticated);
+}
 
 // Basically instantiating all the other sagas
 export function* userSagas(){
-    yield all([call(onGoogleSignInStart), call(onEmailSignInStart)])
+    yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession)])
 }
