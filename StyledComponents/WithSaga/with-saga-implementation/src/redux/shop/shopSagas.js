@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 import { FETCH_COLLECTIONS_START } from "./shopActionTypes";
 import { fetchCollectionsSuccess, fetchCollectionsFailure } from "./shopActons";
 import { firestore, convertCollectionsSnapshotToMap } from "../../firebase/firebase.utils";
@@ -21,5 +21,7 @@ export function* fetchCollectionsAsync(){
 }
 
 export function* fetchCollectionsStart(){
-    yield takeEvery(FETCH_COLLECTIONS_START, fetchCollectionsAsync)
+    // Take latest is a better option here than takeEvery as it cancels 
+    // any other running requests and runs only the final one 
+    yield takeLatest(FETCH_COLLECTIONS_START, fetchCollectionsAsync)
 }
