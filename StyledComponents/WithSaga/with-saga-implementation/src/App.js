@@ -15,41 +15,36 @@ import Checkout from "./pages/checkout/Checkout";
 class App extends React.Component {
 
   //write a method to set subscription to null i.e. unsubscribe i.e. doing this.unsubscribeFromAuth() will close subscription
-  unsubscribeFromAuth = null
+  // unsubscribeFromAuth = null
 
   componentDidMount(){
-    // Getting the dispatcher from redux to set current user
-    const { setCurrentUser } = this.props;
+
+    // const { setCurrentUser } = this.props;
 
     // the onAuthStateChanged method allows us to keep track of user changes - it is essentially a subscriber listening to 
-    // the auth
-    // This is an open subscription - checking for us continuously while our App is mounted on the DOM
-    this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
-      // this.setState({currentUser: userAuth})
-      // console.log(userAuth)
+    // the auth. This is an open subscription - checking for us continuously while our App is mounted on the DOM
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
 
-      if(userAuth){
-        const userRef = await createUserProfileDocument(userAuth)
-        userRef.onSnapshot(snapShot => {
-          // console.log(snapShot.data())
+    //   if(userAuth){
+    //     const userRef = await createUserProfileDocument(userAuth)
+    //     userRef.onSnapshot(snapShot => {
 
-         
-            setCurrentUser({
-              id: snapShot.id, 
-              ...snapShot.data()
-          });
-        });
-      }
-      // if no userAuth, i.e. its null, then set currentUser to null
-      setCurrentUser(userAuth)
-    })
+    //         setCurrentUser({
+    //           id: snapShot.id, 
+    //           ...snapShot.data()
+    //       });
+    //     });
+    //   }
+    //   // if no userAuth, i.e. its null, then set currentUser to null
+    //   setCurrentUser(userAuth)
+    // })
   }
 
-  componentWillUnmount(){
-    //below is important to prevent memory leaks!
-    // close the subscription
-    this.unsubscribeFromAuth()
-  }
+  // componentWillUnmount(){
+  //   //below is important to prevent memory leaks!
+  //   // close the subscription
+  //   this.unsubscribeFromAuth()
+  // }
 
   render(){
     return (
