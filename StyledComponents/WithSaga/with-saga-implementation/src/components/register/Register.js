@@ -1,10 +1,11 @@
 import React from 'react';
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import { RegisterContainer, RegisterTitle } from './registerStyles';
+import { connect } from 'react-redux'
+import { registerStart } from '../../redux/user/userActions';
 
-export default class Register extends React.Component{
+class Register extends React.Component{
     constructor(){
         super()
         this.state={
@@ -21,25 +22,15 @@ export default class Register extends React.Component{
     handleSubmit = async (event) => {
         event.preventDefault()
 
-        const {displayName, email, password, confirmPassword} = this.state
+        const {displayName, email, password, confirmPassword} = this.state;
+        const { registerStart } = this.props;
 
         if(password !== confirmPassword){
             alert("Passwords dont match!")
             return
         }
-
-        try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password)
-            await createUserProfileDocument(user, { displayName })
-            this.setState({
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            })
-        } catch (error) {
-            console.log(error)
-        }
+        registerStart({ displayName, email, password });
+        // No need to reset form state because user is signed in and taken to home page
     }
     render(){
         const {displayName, email, password, confirmPassword} = this.state
@@ -86,3 +77,9 @@ export default class Register extends React.Component{
         )
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    registerStart: (userRegisterDetails) => dispatch(registerStart(userRegisterDetails))
+})
+
+export default connect(null, mapDispatchToProps)(Register)
