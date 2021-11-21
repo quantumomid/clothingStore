@@ -10,6 +10,9 @@ Run npm update first
 - Firebase
 
 - Redux
+    - with Saga
+    - with Thunk
+    - with neither Saga or Thunk
 
 - Stripe API
 
