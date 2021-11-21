@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { auth } from "../../firebase/firebase.utils";
 // below is a special syntax for importing SVG in React :o
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/CartIcon";
@@ -9,8 +8,9 @@ import { selectCurrentUser } from "../../redux/user/userSelectors";
 import { createStructuredSelector } from "reselect";
 
 import { HeaderContainer, LogoContainer, OptionLink, OptionsContainer } from "./headerStyles";
+import { signOutStart } from "../../redux/user/userActions";
 
-function Header({ currentUser, hidden }){
+function Header({ currentUser, hidden, signOutStart }){
 
     return(
         <HeaderContainer>
@@ -27,7 +27,7 @@ function Header({ currentUser, hidden }){
                     CONTACT
                 </OptionLink>
                 { currentUser ? (
-                    <OptionLink as="div" onClick={() => auth.signOut()}>SIGN-OUT</OptionLink>
+                    <OptionLink as="div" onClick={signOutStart}>SIGN-OUT</OptionLink>
                 ) : (
                     <OptionLink to='/signin'>
                     SIGN-IN
@@ -49,4 +49,8 @@ const mapStateToProps = createStructuredSelector({
     hidden: selectCartHidden
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+    signOutStart: () => dispatch(signOutStart())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
