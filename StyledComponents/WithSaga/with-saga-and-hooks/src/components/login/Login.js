@@ -5,7 +5,7 @@ import { ButtonsContainer, LoginContainer, LoginInTitle } from './loginStyles'
 import { connect } from 'react-redux'
 import { emailSignInStart, googleSignInStart } from '../../redux/user/userActions'
 
-const Login = ({ emailSignInStart }) => {
+const Login = ({ emailSignInStart, googleSignInStart }) => {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
 

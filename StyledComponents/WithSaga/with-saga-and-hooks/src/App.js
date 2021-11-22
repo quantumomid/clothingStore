@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import "./App.css";
@@ -11,27 +11,24 @@ import { createStructuredSelector } from "reselect";
 import Checkout from "./pages/checkout/Checkout";
 import { checkUserSession } from "./redux/user/userActions";
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
+const App = ({ checkUserSession, currentUser }) => {
 
-  componentDidMount(){
-    const { checkUserSession } = this.props;
+  useEffect(() => {
     checkUserSession();
-  }
+    // its fine to pass checkUserSession as it is coming from redux and not a parent component
+  }, [checkUserSession])
 
-  render(){
-    return (
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={Shop} />
-          <Route exact path='/checkout' component={Checkout} />
-          <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SignIn />) } />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/shop' component={Shop} />
+        <Route exact path='/checkout' component={Checkout} />
+        <Route exact path='/signin' render={() => currentUser ? (<Redirect to="/" />) : (<SignIn />) } />
+      </Switch>
+    </div>
+  );
 }
 
 const mapStateToProps = createStructuredSelector({
