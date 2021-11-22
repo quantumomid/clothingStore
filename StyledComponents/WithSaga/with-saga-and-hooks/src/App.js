@@ -1,22 +1,28 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import HomePage from "./pages/homepage/HomePage";
 import Shop from "./pages/shop/Shop";
 import Header from "./components/header/Header";
 import SignIn from "./pages/sign-in/SignIn";
 import { selectCurrentUser } from "./redux/user/userSelectors";
-import { createStructuredSelector } from "reselect";
 import Checkout from "./pages/checkout/Checkout";
 import { checkUserSession } from "./redux/user/userActions";
 
-const App = ({ checkUserSession, currentUser }) => {
+const App = () => {
+
+  // the below updates whenever the underlying state that the selector is
+  // connected to also changes
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    checkUserSession();
-    // its fine to pass checkUserSession as it is coming from redux and not a parent component
-  }, [checkUserSession])
+    dispatch(checkUserSession());
+    // Below still same as giving an empty array - i.e. will just run once on mount
+    // because of us saving useDispatch to a variable - on re-renders react will not 
+    // reinitialise another dispatch as it will see one already exists! :)
+  }, [dispatch])
 
   return (
     <div className="App">
@@ -31,12 +37,4 @@ const App = ({ checkUserSession, currentUser }) => {
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser 
-});
-
-const mapDispatchToProps = dispatch => ({
-  checkUserSession: () => dispatch(checkUserSession())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
