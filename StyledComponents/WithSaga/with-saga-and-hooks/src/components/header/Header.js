@@ -1,20 +1,21 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // below is a special syntax for importing SVG in React :o
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 import { selectCartHidden } from "../../redux/cart/cartSelectors";
 import { selectCurrentUser } from "../../redux/user/userSelectors";
-import { createStructuredSelector } from "reselect";
 
 import { HeaderContainer, LogoContainer, OptionLink, OptionsContainer } from "./headerStyles";
 import { signOutStart } from "../../redux/user/userActions";
 
-function Header({ currentUser, hidden, signOutStart }){
+function Header(){
+    const currentUser = useSelector(selectCurrentUser);
+    const hidden = useSelector(selectCartHidden);
+    const dispatch = useDispatch();
 
     return(
         <HeaderContainer>
-
             <LogoContainer to="/">
                 <Logo className="logo" />
             </LogoContainer>
@@ -27,7 +28,7 @@ function Header({ currentUser, hidden, signOutStart }){
                     CONTACT
                 </OptionLink>
                 { currentUser ? (
-                    <OptionLink as="div" onClick={signOutStart}>SIGN-OUT</OptionLink>
+                    <OptionLink as="div" onClick={() => dispatch(signOutStart())}>SIGN-OUT</OptionLink>
                 ) : (
                     <OptionLink to='/signin'>
                     SIGN-IN
@@ -39,18 +40,8 @@ function Header({ currentUser, hidden, signOutStart }){
                 hidden ? null :
                 <CartDropdown />
             }
-
         </HeaderContainer>
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser,
-    hidden: selectCartHidden
-});
-
-const mapDispatchToProps = dispatch => ({
-    signOutStart: () => dispatch(signOutStart())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

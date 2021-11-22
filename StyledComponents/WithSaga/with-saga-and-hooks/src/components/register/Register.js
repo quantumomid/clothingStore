@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
 import { RegisterContainer, RegisterTitle } from './registerStyles';
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { registerStart } from '../../redux/user/userActions';
 
-const Register = ({ registerStart }) => {
+const Register = () => {
     const [ userCredentials, setUserCredentials ] = useState({
         displayName: '',
         email: '',
         password: '',
         confirmPassword: ''
     })
+
+    const dispatch = useDispatch();
 
     const {displayName, email, password, confirmPassword} = userCredentials;
 
@@ -31,7 +33,7 @@ const Register = ({ registerStart }) => {
             alert("Passwords dont match!")
             return
         }
-        registerStart({ displayName, email, password });
+        dispatch(registerStart({ displayName, email, password }));
         // No need to reset form state because user is signed in and taken to home page
     }
 
@@ -78,8 +80,4 @@ const Register = ({ registerStart }) => {
     )
 }
 
-const mapDispatchToProps = dispatch => ({
-    registerStart: (userRegisterDetails) => dispatch(registerStart(userRegisterDetails))
-})
-
-export default connect(null, mapDispatchToProps)(Register)
+export default Register;

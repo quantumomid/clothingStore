@@ -1,12 +1,11 @@
 import React from 'react'
 import MenuItem from '../menu-item/MenuItem'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectDirectorySections } from '../../redux/directory/directorySelector'
-import { createStructuredSelector } from 'reselect'
 import { DirectoryMenuContainer } from './directoryStyles'
 
-const Directory = ({ sections }) => {   
-
+const Directory = () => {   
+    const sections = useSelector(selectDirectorySections);
     const menuItems = sections.map(({ id, ...otherSectionProps }) => <MenuItem key={id} {...otherSectionProps} />)
 
     return(
@@ -16,13 +15,4 @@ const Directory = ({ sections }) => {
     )
 }
 
-//OLD version - essentially returns an object that becomes part of the props
-// const mapStateToProps = (state) => ({
-//     sections: selectDirectorySections(state)
-// });
-
-const mapStateToProps = createStructuredSelector({
-    sections: selectDirectorySections
-});
-
-export default connect(mapStateToProps)(Directory);
+export default Directory;

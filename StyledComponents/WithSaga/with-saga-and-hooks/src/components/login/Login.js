@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
-import FormInput from '../form-input/FormInput'
-import CustomButton from '../custom-button/CustomButton'
-import { ButtonsContainer, LoginContainer, LoginInTitle } from './loginStyles'
-import { connect } from 'react-redux'
-import { emailSignInStart, googleSignInStart } from '../../redux/user/userActions'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import FormInput from "../form-input/FormInput";
+import CustomButton from "../custom-button/CustomButton";
+import { ButtonsContainer, LoginContainer, LoginInTitle } from "./loginStyles";
+import { emailSignInStart, googleSignInStart } from "../../redux/user/userActions";
 
-const Login = ({ emailSignInStart, googleSignInStart }) => {
+const Login = () => {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
+
+    const dispatch = useDispatch();
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -17,7 +19,7 @@ const Login = ({ emailSignInStart, googleSignInStart }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        emailSignInStart(email, password);
+        dispatch(emailSignInStart({ email, password }));
     }
 
     return(
@@ -31,16 +33,11 @@ const Login = ({ emailSignInStart, googleSignInStart }) => {
 
                 <ButtonsContainer>
                     <CustomButton type="submit">Log In</CustomButton>
-                    <CustomButton type="button" onClick={googleSignInStart} isGoogleSignIn>Log In with Google</CustomButton>
+                    <CustomButton type="button" onClick={() => dispatch(googleSignInStart())} isGoogleSignIn>Log In with Google</CustomButton>
                 </ButtonsContainer>
             </form>
         </LoginContainer>
     )
 }
 
-const mapDispatchToProps = dispatch => ({
-    googleSignInStart: () => dispatch(googleSignInStart()),
-    emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password }))
-})
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;
