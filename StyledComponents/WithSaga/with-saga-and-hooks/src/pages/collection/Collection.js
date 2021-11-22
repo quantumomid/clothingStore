@@ -1,12 +1,14 @@
 import CollectionItem from "../../components/collection-item/CollectionItem";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectShopCollection } from "../../redux/shop/shopSelector";
 import { CollectionItemsContainer, CollectionPageContainer, CollectionTitle } from "./collectionStyles";
+import { useParams } from "react-router-dom";
 
-const Collection = ({ match }) => {
-    // console.log(match.params.collectionId);
-    const collection = useSelector(state => selectShopCollection(match.params.collectionId)(state));    
-    const { title, items } = collection;
+const Collection = () => {
+    const { collectionId } = useParams();
+    // console.log(collectionId);
+    const { title, items } = useSelector(selectShopCollection(collectionId));    
+
     return (
         <CollectionPageContainer>
             <CollectionTitle>{ title }</CollectionTitle>
@@ -16,11 +18,5 @@ const Collection = ({ match }) => {
         </CollectionPageContainer>
     )
 }
-
-// // Second parameter here is the own props of the component i.e. Collection
-// // This is very handy as it will allow us access to "match" to use the collectionId!
-// const mapStateToProps = (state, ownProps) => ({
-//     collection: selectShopCollection(ownProps.match.params.collectionId)(state)
-// });
 
 export default Collection;

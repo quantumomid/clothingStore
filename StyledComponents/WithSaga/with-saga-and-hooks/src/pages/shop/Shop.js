@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route } from 'react-router';
 import CollectionsOverviewContainer from '../../components/collections-overview/CollectionsOverviewContainer';
 import { fetchCollectionsStart} from '../../redux/shop/shopActons';
@@ -19,7 +19,6 @@ const Shop = ({ match }) => {
             <Route path={`${match.path}/:collectionId`} component={CollectionContainer} />
         </div>
     )
-    
 };
 
 export default Shop;
