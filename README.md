@@ -7,20 +7,20 @@ Run npm update first
 
 - [SASS for styling](https://www.npmjs.com/package/sass) 
 
-- Firebase
+- [Firebase](https://www.npmjs.com/package/firebase)
     - for storage (FireStore)
     - for authentication
 
-- Redux
-    - with Saga
-    - with Thunk
+- [Redux](https://www.npmjs.com/package/redux)
+    - with [Saga](https://redux-saga.js.org/)
+    - with [Thunk](https://github.com/reduxjs/redux-thunk)
     - with neither Saga or Thunk
 
-- Stripe API
+- [Stripe API](https://stripe.com/docs/stripe-js/react)
 
-- Styled Components 
+- [Styled Components](https://styled-components.com/) 
 
-- Context API
+- [Context API](https://reactjs.org/docs/context.html)
 
 
 ## Deployed
