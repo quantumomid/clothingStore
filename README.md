@@ -3,11 +3,13 @@ Run npm update first
 
 ## Tech used
 
-- React router 
+- [React Router](https://v5.reactrouter.com/web/guides/quick-start) for routing 
 
-- SASS for styling npm install node-sass --save
+- [SASS for styling](https://www.npmjs.com/package/sass) 
 
 - Firebase
+    - for storage (FireStore)
+    - for authentication
 
 - Redux
     - with Saga
@@ -18,13 +20,11 @@ Run npm update first
 
 - Styled Components 
 
-- Authentication
+- Context API
 
 
 ## Deployed
 
-version 1: using static data and scss files 
+With Heroku: https://clothingstore-heroku-live.herokuapp.com/ 
 
-- version 1 with Heroku: https://clothingstore-heroku-live.herokuapp.com/ 
-
-version 2: using styled components and firestore for clothing data storage and retrieval
+Deployed version (currently) reflects the source code inside of StyledComponents/WithSaga/with-saga-and-hooks/
