@@ -6,12 +6,11 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './header.styles.scss';
 import CurrentUserContext from '../../contexts/current-user/currentUserContext';
-import CartContext from '../../contexts/cart/cartContext';
+import { CartContext } from '../../providers/cart/cartProvider';
 
 const Header = () => {
   const currentUser = useContext(CurrentUserContext)
-  const [ hidden, setHidden ] = useState(true);
-  const toggleHidden = () => setHidden(!hidden);
+  const { hidden } = useContext(CartContext);
 
   return (
     <div className='header'>
@@ -34,9 +33,7 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
-        <CartContext.Provider value={{ hidden, toggleHidden }}>
           <CartIcon />
-        </CartContext.Provider>
       </div>
       {hidden ? null : <CartDropdown />}
     </div>
