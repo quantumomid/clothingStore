@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from "react-apollo";
-import { ApolloClient, gql } from "apollo-boost";
+import { ApolloClient } from "apollo-boost";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import './index.css';
-import App from './App';
-
+import initialData from "./graphql/initialData"
 import { resolvers, typeDefs } from "./graphql/resolvers";
-import AppContainer from './AppContainer';
+import AppContainer from './App/AppContainer';
 
 const httpLink = createHttpLink({
   uri: "https://crwn-clothing.com"
@@ -25,15 +24,8 @@ const client = new ApolloClient({
 })
 
 client.writeData({
-  data: {
-    cartHidden: true,
-    cartItems: [],
-    itemCount: 0,
-    cartTotal: 0,
-    currentUser: null
-  }
+  data: initialData
 })
-
 
 ReactDOM.render(
   <ApolloProvider client={client}>
