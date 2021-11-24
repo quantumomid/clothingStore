@@ -1,8 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
-import CollectionItem from '../collection-item/collection-item.component';
-
+import CollectionItemContainer from '../collection-item/CollectionItemContainer';
 import './collection-preview.styles.scss';
 
 const CollectionPreview = ({ title, items, history, match }) => (
@@ -17,7 +15,7 @@ const CollectionPreview = ({ title, items, history, match }) => (
       {items
         .filter((item, idx) => idx < 4)
         .map(item => (
-          <CollectionItem key={item.id} item={item} />
+          <CollectionItemContainer key={item.id} item={item} />
         ))}
     </div>
   </div>
