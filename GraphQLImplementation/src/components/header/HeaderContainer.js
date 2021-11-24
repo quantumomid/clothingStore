@@ -3,18 +3,19 @@ import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 import Header from "./header.component";
 
-const getCardHidden = gql`
+const getClientData = gql`
     {
         cartHidden @client
+        currentUser @client
     }
 `
 
 const HeaderContainer = () => (
-    <Query query={getCardHidden}>
+    <Query query={getClientData}>
         {
             ({ data }) => {
-                const { cartHidden } = data;
-                return <Header hidden={cartHidden} />
+                const { cartHidden, currentUser } = data;
+                return <Header hidden={cartHidden} currentUser={currentUser} />
             }
         }
     </Query>
