@@ -22,6 +22,12 @@ Run npm update first
 
 - [Context API](https://reactjs.org/docs/context.html)
 
+- React Dev Tools 
+    - Profiler for looking for ways to improve performance
+
+- Performance optimisations using React lazy and Suspence, as well as React.memo()
+
+- Error boundary component with custom 404 page using componentDidCatch() and getDerivedStateFromError()
 
 ## Deployed
 
