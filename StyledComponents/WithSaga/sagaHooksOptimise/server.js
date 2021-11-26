@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const compression = require("compression");
 
 if(process.env.NODE_ENV !== "production") require("dotenv").config();
 
@@ -10,6 +11,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 // Instantiate a new express application
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(compression());
 
 // Tells our server to process any incoming requests by converting their
 // body tag to JSON so that we can use it
