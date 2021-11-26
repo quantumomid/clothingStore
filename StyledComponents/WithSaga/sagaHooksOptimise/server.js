@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const compression = require("compression");
+const enforce = require("express-sslify");
 
 if(process.env.NODE_ENV !== "production") require("dotenv").config();
 
@@ -12,7 +13,6 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(compression());
 
 // Tells our server to process any incoming requests by converting their
 // body tag to JSON so that we can use it
@@ -21,6 +21,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 if(process.env.NODE_ENV === "production"){
+    app.use(compression());
+
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
+
     // serve all the static files in our build
     // __dirname tells us what directory we are currently in
     app.use(express.static(path.join(__dirname, "client/build")));
@@ -40,6 +44,10 @@ app.listen(port, error => {
     // otherwise just log out port
     console.log("Server is running on port: " + port);
 });
+
+app.get("/service-worker.js", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "..", "build", "service-worker.js"))
+})
 
 app.post("/payment", (req, res) => {
     
