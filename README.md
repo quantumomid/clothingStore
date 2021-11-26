@@ -39,4 +39,6 @@ Run npm update first
 
 With Heroku: https://clothingstore-heroku-live.herokuapp.com/ 
 
-Deployed version (currently) reflects the source code inside of StyledComponents/WithSaga/with-saga-and-hooks/
+Deployed version (currently) reflects the source code inside of StyledComponents/WithSaga/sagaHooksOptimise/
+
+The deployed version also includes responsive features as well as progressive web app additions (i.e. on mobile devices will get alert to add as an app to your homescreen) - improves offline experience, etc.
