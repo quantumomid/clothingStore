@@ -44,6 +44,25 @@ const config = {
     return userRef
   }
 
+  export const getUserCartRef = async userId => {
+    console.log("ran getUserCartRef");
+    const cartsRef = firestore.collection('carts').where('userId', '==', userId);
+    console.log({ cartsRef });
+    const snapShot = await cartsRef.get();
+    console.log({ snapShot });
+    //returns a reference below in either case to allow us to read and write data to 
+    //this particular cart collection belonging to our user
+    if (snapShot.empty) {
+      const cartDocRef = firestore.collection('carts').doc();
+      console.log({ cartDocRef });
+      await cartDocRef.set({ userId, cartItems: [] });
+      return cartDocRef;
+    } else {
+      console.log("snapsht not empty", snapShot.docs);
+      return snapShot.docs[0].ref;
+    }
+  };
+
   export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
     const collectionRef = firestore.collection(collectionKey);
     console.log(collectionRef);
