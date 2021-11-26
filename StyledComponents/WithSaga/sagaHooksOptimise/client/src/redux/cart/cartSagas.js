@@ -1,7 +1,10 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
+import { takeLatest, put, all, call, select } from "redux-saga/effects";
 import { SIGN_OUT_SUCCESS, SIGN_IN_SUCCESS } from "../user/userActionTypes";
-import { clearCart, setCartFromFirebase } from "./cartActions";
+import { clearCart, setCartFromFirebase, updateCartItemsInFirebase } from "./cartActions";
 import { getUserCartRef } from "../../firebase/firebase.utils";
+import { selectCurrentUser } from '../user/userSelectors';
+import { selectCartItems } from './cartSelectors';
+import { ADD_ITEM, CLEAR_ITEM_FROM_CART, REMOVE_ITEM } from "./cartActionTypes";
 
 export function* clearCartOnSignOut(){
     yield put(clearCart());
@@ -29,6 +32,36 @@ export function* onUserSignIn() {
     yield takeLatest(SIGN_IN_SUCCESS, checkCartFromFirebase);
 }
 
+// update the cart items in firebase as the user adds, removes or 
+// clears their cart in the front end to keep firebase cart items 
+// and redux ones in sync!
+export function* updateCartInFirebase() {
+    const currentUser = yield select(selectCurrentUser);
+    if (currentUser) {
+      try {
+        const cartRef = yield getUserCartRef(currentUser.id);
+        const cartItems = yield select(selectCartItems);
+        yield cartRef.update({ cartItems });
+        yield put(updateCartItemsInFirebase());
+      } catch (error) {
+        console.log(error);
+      }
+    }
+}
+  
+// We also need to track whenever our cart state in redux changes 
+// so we can update our carts in firebase ACCORDINGLY!
+export function* onCartChange() {
+    yield takeLatest(
+      [
+        ADD_ITEM,
+        REMOVE_ITEM,
+        CLEAR_ITEM_FROM_CART
+      ],
+      updateCartInFirebase
+    );
+}
+
 export function* cartSagas(){
-    yield all([call(onSignOutSuccess), call(onUserSignIn)]);
+    yield all([call(onSignOutSuccess), call(onUserSignIn), call(onCartChange)]);
 }

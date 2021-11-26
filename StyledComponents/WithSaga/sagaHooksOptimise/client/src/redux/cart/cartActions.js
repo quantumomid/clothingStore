@@ -24,7 +24,7 @@ export const clearCart = () => ({
 });
 
 // Needs no argument because updating in FIREBASE not our front end i.e. not redux
-export const updateCartInFirebase = () => ({
+export const updateCartItemsInFirebase = () => ({
     type: UPDATE_CART_IN_FIREBASE
 });
 
