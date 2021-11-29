@@ -35,6 +35,8 @@ Run npm update first
 
 - Progressive Web App (PWA) that come pre-built with CRA when using the cra-template-pwa
 
+- Snapshot testing and unit testing with Enzyme (see sagaHooksOptimised folder)
+
 ## Deployed
 
 With Heroku: https://clothingstore-heroku-live.herokuapp.com/ 

@@ -30,6 +30,7 @@ export const TextContainer = styled.span`
       width: 22%;
     }
 `
+TextContainer.displayName = "TextContainer"
 
 export const QuantityContainer = styled(TextContainer)`
     display: flex;
@@ -42,8 +43,10 @@ export const QuantityContainer = styled(TextContainer)`
         margin: 0 10px;
       }
 `
+QuantityContainer.displayName = 'QuantityContainer';
 
 export const RemoveButtonContainer = styled.div`
     padding-left: 12px;
     cursor: pointer;
 `
+RemoveButtonContainer.displayName = 'RemoveButtonContainer';

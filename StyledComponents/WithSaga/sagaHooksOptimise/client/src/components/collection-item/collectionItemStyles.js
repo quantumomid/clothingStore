@@ -41,6 +41,7 @@ export const BackgroundImage = styled.div`
     background-position:center;
     margin-bottom: 5px;
 `
+BackgroundImage.displayName = "BackgroundImage";
 
 export const CollectionFooterContainer = styled.div`
     width: 100%;
@@ -54,10 +55,13 @@ export const NameContainer = styled.span`
     width: 90%;
     margin-bottom: 15px;
 `
+NameContainer.displayName = "NameContainer";
+
 export const PriceContainer = styled.span`
     width: 10%;
     text-align: right;
 `
+PriceContainer.displayName = "PriceContainer";
 
 export const AddCartButton = styled(CustomButton)`
     width: 80%;
@@ -72,3 +76,5 @@ export const AddCartButton = styled(CustomButton)`
         padding: 0 10px;
     }
 `
+
+AddCartButton.displayName = "AddCartButton";

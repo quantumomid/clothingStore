@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cart Icon Component Checkout Item component should be rendered 1`] = `ShallowWrapper {}`;
+
+exports[`Checkout Component Checkout Item component should be rendered 1`] = `ShallowWrapper {}`;
