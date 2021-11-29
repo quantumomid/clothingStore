@@ -1,6 +1,7 @@
 import * as redux from 'react-redux';
 import { shallow } from "enzyme";
 import CartIcon from './CartIcon';
+import { toggleCartHidden } from '../../redux/cart/cartActions';
 
 describe("Cart Icon Component", () => {
     let wrapper;
@@ -33,6 +34,11 @@ describe("Cart Icon Component", () => {
     it('Dispatch is called when icon is clicked', () => {
         wrapper.find('CartIconContainer').simulate('click');
         expect(mockDispatch).toHaveBeenCalled();
+    });
+
+    it('Dispatch is called with toggleCartHidden when icon is clicked', () => {
+        wrapper.find('CartIconContainer').simulate('click');
+        expect(mockDispatch).toHaveBeenCalledWith(toggleCartHidden());
     });
 
     it('Should render the itemCount as the text', () => {
