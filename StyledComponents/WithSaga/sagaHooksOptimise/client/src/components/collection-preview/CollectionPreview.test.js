@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CollectionPreview from "./CollectionPreview";
+import {CollectionPreview} from "./CollectionPreview";
 
 describe('CollectionPreview component', () => {
   let wrapper;
@@ -39,11 +39,11 @@ describe('CollectionPreview component', () => {
     });
 
     // // Some issue with finding the title container below
-    // it('Should call history.push with the right string when TitleContainer clicked', () => {
-    //     wrapper.find("TitleContainer").simulate('click');
+    it('Should call history.push with the right string when TitleContainer clicked', () => {
+        wrapper.find("TitleContainer").simulate('click');
     
-    //     expect(mockHistory.push).toHaveBeenCalledWith(
-    //       `${mockMatch.path}/${mockRouteName}`
-    //     );
-    // });
+        expect(mockHistory.push).toHaveBeenCalledWith(
+          `${mockMatch.path}/${mockRouteName}`
+        );
+    });
 })
