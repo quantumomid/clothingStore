@@ -42,3 +42,4 @@ export const OptionLink = styled(Link)`
     padding: 10px 15px;
     cursor: pointer
 `
+OptionLink.displayName = 'OptionLink';

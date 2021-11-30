@@ -38,6 +38,7 @@ export const FormInputContainer = styled.input`
     ${shrinkLabelStyles}
   }
 `;
+FormInputContainer.displayName = 'FormInputContainer';
 
 export const FormInputLabel = styled.label`
 color: $sub-color;
@@ -53,3 +54,4 @@ transition: 300ms ease all;
     ${shrinkLabelStyles}
 }
 `
+FormInputLabel.displayName = 'FormInputLabel';
