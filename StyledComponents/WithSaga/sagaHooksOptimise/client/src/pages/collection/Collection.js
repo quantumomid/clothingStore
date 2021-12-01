@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const Collection = () => {
     const { collectionId } = useParams();
-    // console.log(collectionId);
+    console.log(collectionId);
     const { title, items } = useSelector(selectShopCollection(collectionId));    
 
     return (
