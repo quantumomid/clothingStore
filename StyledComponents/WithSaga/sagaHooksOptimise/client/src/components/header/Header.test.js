@@ -14,8 +14,6 @@ describe('Header component', () => {
   let wrapper;
 
   beforeEach(() => {
-
-
     wrapper = mount(
         <Provider store={store}>
             <BrowserRouter>
@@ -80,9 +78,7 @@ describe('Header component with user logged in', () => {
           .simulate('click');
           expect(mockDispatch).toHaveBeenCalled();
           expect(mockDispatch).toHaveBeenCalledWith(signOutStart());
-
       });
-
   })
 
   describe('If hidden is true then CartDropdown should be showing', () => {

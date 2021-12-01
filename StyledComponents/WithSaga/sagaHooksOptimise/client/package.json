@@ -40,6 +40,23 @@
     "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/firebase",
+      "<rootDir>/src/App.js",
+      "<rootDir>/src/index.js",
+      "<rootDir>/src/reportWebVitals.js",
+      "<rootDir>/src/service-worker.js",
+      "<rootDir>/src/serviceWorkerRegistration.js",
+      "<rootDir>/src/globalStyles.js",
+      "<rootDir>/src/data"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
