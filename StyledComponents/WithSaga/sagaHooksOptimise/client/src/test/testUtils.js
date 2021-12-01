@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import rootReducer from "../redux/root-reducer";
+import rootReducer from "../redux/rootReducer";
 
 // export const mockStore = (initialState) => {
 //     return createStore(rootReducer, initialState);
